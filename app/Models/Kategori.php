@@ -4,20 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Kategori extends Model
 {
     use HasFactory;
 
     protected $table = 'kategori';
-
     protected $fillable = ['deskripsi','kategori'];
 
-    public function ketKategori()
+    public static function infoKategori(){
+        return DB::table('kategori')
+            ->select('kategori.id','deskripsi',DB::raw('infoKategori(kategori) as Info'))->get();
+    }
+
+    public function ketKategorik()
     {
         switch ($this->kategori) {
             case 'M':
-                return 'Barang Modal';
+                return 'Modal Barang';
             case 'A':
                 return 'Alat';
             case 'BHP':
@@ -29,11 +34,9 @@ class Kategori extends Model
         }
     }
 
-   
     public static function getKategoriAll(){
         return DB::table('kategori')
-        ->join('barang', 'kategori_id', '=', 'barang.kategori_id')
-        ->select('kategori_id', 'deskripsi', DB::raw('ketKategorik (kategori) as ketkategorik'), 'barang.merk');
+            ->select('kategori.id','deskripsi',DB::raw('ketKategorik(kategori) as ketkategorik'));
     }
 
 }
