@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kategori', function (Blueprint $table) {
-            $table->tinyIncrements('id');
-            $table->string('deskripsi',100)->nullable();
-            $table->enum('kategori',['A','M','BHP','BTHP'])->default('A');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategori');
+        Schema::dropIfExists('users');
     }
-}; 
+};

@@ -34,7 +34,7 @@
                     <tbody>
                         @forelse ($rsetBarangKeluar as $rowbarangkeluar)
                             <tr>
-                                <td>{{ ++$i }}</td>
+                            <td>{{ $loop->iteration }}</td>
                                 <td>{{ $rowbarangkeluar->tgl_keluar  }}</td>
                                 <td>{{ $rowbarangkeluar->qty_keluar  }}</td>
                                 <td>{{ $rowbarangkeluar->barang->merk  }} {{ $rowbarangkeluar->barang->seri  }}</td>
