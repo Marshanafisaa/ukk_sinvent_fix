@@ -57,7 +57,23 @@ class apiKategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kategori = Kategori::find($id);
+
+        $request->validate([
+            'deskripsi'   => 'required',
+            'kategori'    => 'required',
+        ]);
+        
+        if (!$kategori) {
+            return response()->json(['status' => 'Kategori tidak ditemukan'], 404);
+        }else{
+            $kategori->update([
+                'deskripsi'=>$request->deskripsi,
+                'kategori'=>$request->kategori,
+            ]);
+
+        return response()->json(['status' => 'Kategori berhasil diubah'], 200);          
+        }
     }
 
     /**
